@@ -1,14 +1,12 @@
 require('colors');
 
-JSON.stringifyNoColor = JSON.stringify;
-
-JSON.stringify = function (obj, filter, indent, level) {
+JSON.colorStringify = function (obj, filter, indent, level) {
   indent = indent || 0;
   level = level || 0;
 
   var output = '';
   if (typeof obj === 'string') {
-    output += obj.green;
+    output += '"'.grey + obj.green + '"'.grey;
 
   } else if (typeof obj === 'number') {
     output += ('' + obj).cyan;
@@ -41,13 +39,7 @@ JSON.stringify = function (obj, filter, indent, level) {
         }
 
         output += ' '.repeat(indent + level * indent) + '"'.grey + key.magenta + '":'.grey + (indent ? ' ' : '');
-
-        if (typeof value === 'string') {
-          // This is needed by console.log auto stringify
-          output += '"'.grey + JSON.stringify(value, filter, indent, level + 1) + '"'.grey + ',\n';
-        } else {
-          output += JSON.stringify(value, filter, indent, level + 1) + ',\n';
-        }
+        output += JSON.colorStringify(value, filter, indent, level + 1) + ',\n';
       });
 
       output = output.replace(/,\n$/, '\n');
@@ -56,7 +48,7 @@ JSON.stringify = function (obj, filter, indent, level) {
     } else {
       output += '[\n'.grey;
       obj.forEach(subObj => {
-        output += ' '.repeat(indent + level * indent) + JSON.stringify(subObj, filter, indent, level + 1) + ',\n';
+        output += ' '.repeat(indent + level * indent) + JSON.colorStringify(subObj, filter, indent, level + 1) + ',\n';
       });
 
       output = output.replace(/,\n$/, '\n');

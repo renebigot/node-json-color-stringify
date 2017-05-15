@@ -1,13 +1,12 @@
-# marvin-logger
+# node-json-color-stringify
 
-Substitute JSON.stringify with a "colorized" version for console (Compatible with Windows and UNIX like systems) Edit
-Add topics
+Add a colorized version of `JSON.stringify` to JSON for console (Compatible with Windows and UNIX like systems).
 
 ## Features
 
 ![screenshot macOS](https://raw.githubusercontent.com/renebigot/node-json-color-stringify/master/img/mac.png)
 
-`node-json-color-stringify` replace JSON.stringify method by a new one that highlights JSON content for console output.
+`node-json-color-stringify` offers an alternative method to replace JSON.stringify method by a new one that highlights JSON content for console output.
 
 
 ## Install
@@ -17,26 +16,26 @@ Add topics
 
 ## Usage
 
-Import `node-json-color-stringify` and use `JSON.stringify` as usual:
+Colorized version is available as `JSON.colorStringify`:
+
+```javascript
+require('node-json-color-stringify');
+console.log(JSON.colorStringify({string: 'foo', nullElement: null, bool: false, integer: 42, array: ['Foo', 'bar']}));
+```
+
+Import `node-json-color-stringify` and use `JSON.stringify` as usual for non-colorized object output:
 
 ```javascript
 require('node-json-color-stringify');
 console.log(JSON.stringify({string: 'foo', nullElement: null, bool: false, integer: 42, array: ['Foo', 'bar']}));
 ```
 
-Old `JSON.stringify` is available as `JSON.stringifyNoColor`:
-
-```javascript
-require('node-json-color-stringify');
-console.log(JSON.stringifyNoColor({string: 'foo', nullElement: null, bool: false, integer: 42, array: ['Foo', 'bar']}));
-```
-
 Replace array or function are also available:
 
 ```javascript
 require('node-json-color-stringify');
-console.log(JSON.stringify(data, ['nullElement'], 2));
-console.log(JSON.stringify(data, (key, value) => {
+console.log(JSON.colorStringify(data, ['nullElement'], 2));
+console.log(JSON.colorStringify(data, (key, value) => {
   if (key === 'string') {
     return undefined;
   } else if (value === null) {

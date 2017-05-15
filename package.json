@@ -1,0 +1,22 @@
+{
+  "name": "node-json-color-stringify",
+  "version": "1.0.0",
+  "description": "JSON.stringify substitution to colorize output to STDOUT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renebigot/node-json-color-stringify.git"
+  },
+  "author": "Rene BIGOT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/renebigot/node-json-color-stringify/issues"
+  },
+  "homepage": "https://github.com/renebigot/node-json-color-stringify#readme",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}

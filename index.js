@@ -19,32 +19,35 @@ JSON.colorStringify = function (obj, filter, indent, level) {
 
   } else if (obj !== undefined && typeof obj !== 'function') {
     if (obj.length === undefined) {
-      output += '{\n'.grey;
-      Object.keys(obj).forEach(key => {
-        var value = obj[key];
+      if (Object.prototype.toString.call(obj) === '[object Date]') {
+        output += obj.toString().grey;
+      } else {
+        output += '{\n'.grey;
+        Object.keys(obj).forEach(key => {
+          var value = obj[key];
 
-        if (filter) {
-          if (typeof filter === 'function') {
-            value = filter(key, value);
+          if (filter) {
+            if (typeof filter === 'function') {
+              value = filter(key, value);
 
-          } else if (typeof filter === 'object' && filter.length !== undefined) {
-            if (filter.indexOf(key) < 0) {
-              return;
+            } else if (typeof filter === 'object' && filter.length !== undefined) {
+              if (filter.indexOf(key) < 0) {
+                return;
+              }
             }
           }
-        }
 
-        if (value === undefined) {
-          return;
-        }
+          if (value === undefined) {
+            return;
+          }
 
-        output += ' '.repeat(indent + level * indent) + '"'.grey + key.magenta + '":'.grey + (indent ? ' ' : '');
-        output += JSON.colorStringify(value, filter, indent, level + 1) + ',\n';
-      });
+          output += ' '.repeat(indent + level * indent) + '"'.grey + key.magenta + '":'.grey + (indent ? ' ' : '');
+          output += JSON.colorStringify(value, filter, indent, level + 1) + ',\n';
+        });
 
-      output = output.replace(/,\n$/, '\n');
-      output += ' '.repeat(level * indent) + '}'.grey;
-
+        output = output.replace(/,\n$/, '\n');
+        output += ' '.repeat(level * indent) + '}'.grey;
+      }
     } else {
       output += '[\n'.grey;
       obj.forEach(subObj => {

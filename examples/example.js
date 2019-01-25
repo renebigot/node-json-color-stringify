@@ -1,6 +1,6 @@
 require('../index.js');
 
-var data = {string: 'foo', nullElement: null, bool: false, integer: 42, array: ['Foo', 'bar']};
+var data = {string: 'foo', nullElement: null, bool: false, integer: 42, array: ['Foo', 'bar'], date: new Date(),};
 
 // Colorized
 console.log(JSON.colorStringify(data, null, 2));
